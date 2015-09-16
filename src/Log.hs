@@ -11,8 +11,9 @@ import Control.Monad
 type Map = M.Map
 
 type Name = Int
-type Timestamp = Int
-type Log a = (Int, Int, Map Name (Timestamp, a))
+type Time = Int
+type Weight = Int
+type Log a = (Int, Int, Map Name (Time, a))
 
 type From = Name
 type To = Name
@@ -41,7 +42,10 @@ adds :: [a] -> Log a -> IO (Log a)
 adds xs m = foldM (flip add) m xs
 
 look :: Name -> Log a -> a
-look n (_, _, e) = snd . fromJust $ M.lookup n e
+look n = snd . lookt n
+
+lookt :: Name -> Log a -> (Time, a)
+lookt n (_, _, e) = fromJust $ M.lookup n e
 
 name :: Log a -> Name
 name (n, _, _) = n
@@ -51,7 +55,7 @@ root (_, r, _) = r
 
 setRoot r (a, _, b) = (a, r, b)
 
-env :: Log a -> Map Name (Timestamp, a)
+env :: Log a -> Map Name (Time, a)
 env (_, _, e) = e
 
 comment :: Text -> Name -> Log Entry -> IO (Log Entry)

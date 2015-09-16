@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+<script src="jquery-2.1.4.js"></script>
+<script src="main.js"></script>
 <script type="text/javascript">
 console.log('hello');
+
+//var update = function(str) {
+//  var m = document.getElementById("main");
+//  if (m)
+//    document.body.removeChild(m);
+//  var d = document.createElement("div");
+//  d.id = "main";
+//  d.textContent = str;
+//  document.body.appendChild(d);
+//  console.log(d);
+//}
+
+$(document).ready(function() {
+  });
+
+
 var sock = new WebSocket("ws://0.0.0.0:9160");
 sock.onopen = function(event) {
   console.log('connected?');
@@ -12,7 +31,19 @@ sock.onopen = function(event) {
 };
 
 sock.onmessage = function(event) {
-  console.log(JSON.parse(event.data));
+  var obj = JSON.parse(event.data);
+  console.log(obj);
+
+  mk(renderThing(obj));
+  return;
+
+  switch (obj.type) {
+    case graph:
+      break;
+    case task:
+      var t = obj.val;
+      break;
+  }
 }
 
 </script>

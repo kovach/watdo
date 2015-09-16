@@ -68,6 +68,7 @@ prefixMsg id msg = T.concat [T.pack (show id), ": ", msg]
 
 talk id conn state = forever $ do
   msg <- WS.receiveData conn
+  T.putStrLn $ "got: " `mappend` msg
   SS {clients = cs} <- readMVar state
   broadcast id (prefixMsg id msg) cs
 

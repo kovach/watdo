@@ -1,0 +1,16 @@
+.text, .tag {
+  padding: 2px;
+  color: black;
+  display: inline-block;
+  font-size: 16pt;
+}
+
+.tag {
+  color: #777;
+  font-size: 14pt;
+}
+
+ul li {
+  list-style-type: none;
+}
+

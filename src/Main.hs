@@ -16,6 +16,7 @@ import Control.Concurrent (MVar, newMVar, modifyMVar_, modifyMVar, readMVar)
 import Log
 import Conversion
 import Server
+import Graphs
 
 
 main = do
